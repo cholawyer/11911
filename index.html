@@ -4,135 +4,106 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>일단 멈추세요 (11911) — 조장현 변호사</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0b1220;--navy2:#0f1a2e;--navy3:#162238;--navy4:#1c2d47;--blue:#2563a8;--blue2:#3b7dd8;--w:#fff;--w9:rgba(255,255,255,.9);--w6:rgba(255,255,255,.6);--w3:rgba(255,255,255,.3);--w1:rgba(255,255,255,.08);--green:#34c759;--yellow:#ff9f0a;--red:#ff453a;--r:16px;--rs:10px}
+:root{--bg:#f0f4f8;--card:#fff;--border:rgba(0,0,0,.06);--text:#1a1a2e;--sub:#6b7280;--sub2:#9ca3af;--blue:#2563eb;--blue-light:#eff6ff;--green:#10b981;--green-bg:#ecfdf5;--red:#ef4444;--red-bg:#fef2f2;--orange:#f59e0b;--orange-bg:#fff7ed;--r:16px;--rs:12px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{background:var(--navy);color:var(--w);font-family:'Noto Sans KR',-apple-system,sans-serif;min-height:100vh;overflow-x:hidden}
-#splash{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:40px 24px}
-#splash.hidden{display:none}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',-apple-system,sans-serif;min-height:100vh;overflow-x:hidden}
+.app{max-width:440px;margin:0 auto;min-height:100vh;background:linear-gradient(180deg,#e8edf5 0%,#f0f4f8 30%,#f7f9fc 100%);padding:0 0 140px}
+#splash{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:40px 24px;background:linear-gradient(180deg,#1a1a2e 0%,#0f172a 100%)}
 #home{display:none}
-.sp-icon{width:80px;height:80px;background:linear-gradient(135deg,#1a3a6a,#0d2040);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:24px;animation:pop .6s cubic-bezier(.34,1.56,.64,1);box-shadow:0 20px 60px rgba(20,50,100,.5)}
+.sp-icon{width:80px;height:80px;background:linear-gradient(135deg,#2563eb,#1d4ed8);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:24px;animation:pop .6s cubic-bezier(.34,1.56,.64,1);box-shadow:0 20px 60px rgba(37,99,235,.4)}
 @keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
-.sp-t{font-size:22px;font-weight:700;margin-bottom:6px;animation:fu .6s ease .2s both}
-.sp-s{font-size:14px;color:var(--w6);animation:fu .6s ease .3s both}
-.sp-bar{width:120px;height:3px;background:var(--w1);border-radius:2px;margin-top:40px;overflow:hidden;animation:fu .6s ease .4s both}
-.sp-fill{height:100%;background:linear-gradient(to right,#2563a8,#8aaec8);border-radius:2px;animation:lb 1.2s ease .5s both}
+.sp-t{font-size:24px;font-weight:900;color:#fff;margin-bottom:6px;animation:su .6s ease .2s both}
+.sp-s{font-size:14px;color:rgba(255,255,255,.6);animation:su .6s ease .3s both}
+.sp-bar{width:120px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin-top:40px;overflow:hidden;animation:su .6s ease .4s both}
+.sp-fill{height:100%;background:linear-gradient(90deg,#2563eb,#60a5fa);border-radius:2px;animation:lb 2s ease .5s both}
 @keyframes lb{from{width:0}to{width:100%}}
-@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.app{max-width:480px;margin:0 auto;padding:0 0 40px}
-.hdr{padding:56px 24px 0;animation:fu .6s ease .1s both}
-.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(180,200,220,.08);border:1px solid rgba(180,200,220,.2);color:#a8c0d4;font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;letter-spacing:.05em;margin-bottom:20px}
-.badge::before{content:'🔒';font-size:10px}
-.ttl{font-size:clamp(28px,7vw,40px);font-weight:700;line-height:1.15;letter-spacing:-.03em;margin-bottom:12px}
-.ttl .hl{background:linear-gradient(135deg,#c8d8e8,#8aaec8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.sub{font-size:15px;color:var(--w6);line-height:1.6;font-weight:300}
-.sec-t{font-size:11px;font-weight:600;letter-spacing:.12em;color:var(--w3);text-transform:uppercase;padding:0 24px;margin:32px 0 12px}
+@keyframes su{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.sp-btn{margin-top:40px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:14px 40px;border-radius:14px;font-size:16px;font-weight:600;font-family:'Noto Sans KR',sans-serif;cursor:pointer}
+.hdr{padding:48px 24px 0;animation:su .5s ease .1s both}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--green-bg);color:var(--green);font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px;margin-bottom:16px}
+.badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.5s ease infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.ttl{font-size:clamp(26px,7vw,34px);font-weight:900;line-height:1.2;letter-spacing:-.03em;margin-bottom:10px}
+.sub{font-size:14px;color:var(--sub);line-height:1.6}
+.sec-t{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--sub2);text-transform:uppercase;padding:0 24px;margin:28px 0 12px;display:flex;align-items:center;gap:8px}
+.sec-t::before{content:'';width:3px;height:14px;border-radius:2px;background:var(--blue)}
 .phase-list{padding:0 16px;display:flex;flex-direction:column;gap:10px}
-.pc{background:var(--navy2);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:18px 20px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:16px;animation:fu .5s ease both}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow);animation:su .4s ease both}
 .pc:nth-child(1){animation-delay:.15s}.pc:nth-child(2){animation-delay:.2s}.pc:nth-child(3){animation-delay:.25s}.pc:nth-child(4){animation-delay:.3s}
-.pc:hover,.pc:active{background:var(--navy3);border-color:rgba(255,255,255,.12);transform:scale(.99)}
-.pi{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.pi.g{background:rgba(52,199,89,.15)}.pi.y{background:rgba(255,159,10,.15)}.pi.r{background:rgba(255,69,58,.15)}.pi.b{background:rgba(30,111,207,.15)}
-.pn{font-size:15px;font-weight:600;margin-bottom:3px;color:var(--w9)}
-.pd{font-size:12px;color:var(--w6);font-weight:300;line-height:1.4}
-.pa{color:var(--w3);font-size:16px;margin-left:auto;flex-shrink:0}
-.calc-card{margin:0 16px;background:var(--navy2);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:20px;animation:fu .5s ease .35s both}
+.pc:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.08)}.pc:active{transform:scale(.985)}
+.pi{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.pi.g{background:#ecfdf5}.pi.y{background:#fff7ed}.pi.r{background:#fef2f2}.pi.b{background:var(--blue-light)}
+.pn{font-size:15px;font-weight:700;margin-bottom:3px}.pd{font-size:12px;color:var(--sub);line-height:1.4}
+.pa{color:#cbd5e1;font-size:18px;margin-left:auto;flex-shrink:0}
+.calc-card{margin:0 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);animation:su .4s ease .35s both}
 .ch{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.ci{width:36px;height:36px;background:rgba(191,90,242,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px}
-.ct{font-size:15px;font-weight:600}.cs{font-size:11px;color:var(--w6);font-weight:300}
-.cl{font-size:11px;color:var(--w3);font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin:16px 0 8px}
+.ci{width:36px;height:36px;background:rgba(139,92,246,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.ct{font-size:15px;font-weight:700}.cs{font-size:11px;color:var(--sub)}
+.cl{font-size:11px;color:var(--sub2);font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin:16px 0 8px}
 .pg{display:flex;flex-wrap:wrap;gap:6px}
-.pill{background:var(--w1);border:1px solid rgba(255,255,255,.08);color:var(--w6);padding:7px 14px;border-radius:20px;font-size:13px;font-family:'Noto Sans KR',sans-serif;cursor:pointer;transition:all .15s}
-.pill:hover{background:rgba(255,255,255,.12);color:var(--w)}
-.pill.active{background:#1a3a6a;border-color:rgba(180,200,220,.3);color:#e8f0f8}
-.br{display:none;margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);text-align:center;animation:fu .3s ease}
-.br.show{display:block}
-.bl{font-size:11px;color:var(--w3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
-.bv{font-size:52px;font-weight:700;letter-spacing:-.03em;line-height:1;margin-bottom:12px}
-.bb{display:inline-block;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:500;margin-bottom:8px}
-.bb.safe{background:rgba(52,199,89,.15);color:#34c759}.bb.warn{background:rgba(255,159,10,.15);color:#ff9f0a}.bb.danger{background:rgba(255,69,58,.15);color:#ff453a}.bb.critical{background:rgba(255,69,58,.25);color:#ff453a}
-.bt{font-size:12px;color:var(--w6)}
-.ca{padding:24px 16px 0;animation:fu .5s ease .4s both}
-.cb1{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:linear-gradient(135deg,#1a3a6a,#0f2a52);border:1px solid rgba(180,200,220,.2);color:#e8f0f8;padding:17px;border-radius:var(--r);font-family:'Noto Sans KR',sans-serif;font-size:16px;font-weight:600;text-decoration:none;transition:all .2s;margin-bottom:10px}
-.cb1:hover{background:var(--blue2);transform:scale(.99)}
-.cb2{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--w1);border:1px solid rgba(255,255,255,.1);color:var(--w9);padding:15px;border-radius:var(--r);font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:500;text-decoration:none;transition:all .2s}
-.cb2:hover{background:rgba(255,255,255,.12)}
-.cn{text-align:center;font-size:12px;color:var(--w3);margin-top:10px}
-.ftr{padding:32px 24px 0;border-top:1px solid rgba(255,255,255,.06);margin-top:32px;animation:fu .5s ease .45s both}
-.fn{font-size:14px;font-weight:600;color:var(--w9);margin-bottom:6px}
-.fi{font-size:12px;color:var(--w3);line-height:2;font-weight:300}
-.panel{display:none;animation:fu .3s ease}.panel.active{display:block}
+.pill{background:#f3f4f6;border:1px solid #e5e7eb;color:var(--sub);padding:8px 14px;border-radius:20px;font-size:13px;font-family:'Noto Sans KR',sans-serif;cursor:pointer;transition:all .15s;font-weight:500}
+.pill:hover{background:#e5e7eb;color:var(--text)}.pill.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.br{display:none;margin-top:20px;padding-top:20px;border-top:1px solid var(--border);text-align:center;animation:su .3s ease}.br.show{display:block}
+.bl{font-size:11px;color:var(--sub2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.bv{font-size:48px;font-weight:900;letter-spacing:-.03em;line-height:1;margin-bottom:12px}
+.bb{display:inline-block;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:8px}
+.bb.safe{background:#ecfdf5;color:#10b981}.bb.warn{background:#fff7ed;color:#f59e0b}.bb.danger{background:#fef2f2;color:#ef4444}.bb.critical{background:#fef2f2;color:#ef4444}
+.bt{font-size:12px;color:var(--sub)}
+.ca{padding:24px 16px 0;animation:su .4s ease .4s both}
+.cb1{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--blue);color:#fff;padding:17px;border-radius:var(--r);font-family:'Noto Sans KR',sans-serif;font-size:16px;font-weight:700;text-decoration:none;transition:all .2s;margin-bottom:10px;box-shadow:0 4px 16px rgba(37,99,235,.3)}
+.cb1:hover{background:#1d4ed8}.cb2{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:15px;border-radius:var(--r);font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s;box-shadow:var(--shadow)}
+.cb2:hover{background:#f9fafb}.cn{text-align:center;font-size:12px;color:var(--sub2);margin-top:10px}
+.ftr{padding:32px 24px 0;border-top:1px solid var(--border);margin-top:32px}
+.fn{font-size:14px;font-weight:700;margin-bottom:4px}.fi{font-size:12px;color:var(--sub);line-height:2}
+.panel{display:none;animation:su .3s ease}.panel.active{display:block}
 #mv{display:block}
-.ph{display:flex;align-items:center;gap:12px;padding:56px 24px 24px}
-.bb-btn{width:36px;height:36px;background:var(--w1);border:none;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
-.bb-btn:hover{background:rgba(255,255,255,.15)}
-.pt{font-size:20px;font-weight:700;letter-spacing:-.02em}
-.pbg{margin-left:auto;font-size:10px;font-weight:600;letter-spacing:.1em;padding:3px 10px;border-radius:20px;flex-shrink:0}
-.pbg.g{background:rgba(52,199,89,.2);color:#34c759}.pbg.y{background:rgba(255,159,10,.2);color:#ff9f0a}.pbg.r{background:rgba(255,69,58,.2);color:#ff453a}.pbg.b{background:rgba(30,111,207,.2);color:#6ab4ff}
-.ab{margin:0 16px 16px;background:rgba(255,69,58,.08);border:1px solid rgba(255,69,58,.2);border-radius:var(--r);padding:16px 18px}
-.at{font-size:11px;font-weight:600;color:#ff6b63;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
-.ai{font-size:13px;color:var(--w6);padding:4px 0 4px 16px;position:relative;line-height:1.5}
-.ai::before{content:'✕';position:absolute;left:0;color:#ff453a;font-size:10px;top:5px}
+.ph{display:flex;align-items:center;gap:12px;padding:48px 20px 20px}
+.bb-btn{width:40px;height:40px;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:var(--shadow)}
+.bb-btn:hover{background:#f9fafb}
+.pt{font-size:18px;font-weight:800;letter-spacing:-.02em}
+.pbg{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.08em;padding:4px 12px;border-radius:20px;flex-shrink:0}
+.pbg.g{background:#ecfdf5;color:#10b981}.pbg.y{background:#fff7ed;color:#f59e0b}.pbg.r{background:#fef2f2;color:#ef4444}.pbg.b{background:var(--blue-light);color:var(--blue)}
+.ab{margin:0 16px 16px;background:var(--red-bg);border:1px solid rgba(239,68,68,.12);border-radius:var(--r);padding:16px 18px}
+.at{font-size:12px;font-weight:700;color:var(--red);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.ai{font-size:13px;color:#7f1d1d;padding:5px 0 5px 18px;position:relative;line-height:1.5}
+.ai::before{content:'✕';position:absolute;left:0;color:var(--red);font-size:11px;top:6px;font-weight:700}
 .sl{padding:0 16px;display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.si{background:var(--navy2);border:1px solid rgba(255,255,255,.06);border-radius:var(--rs);padding:15px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--w9);transition:all .15s;text-align:left}
-.si:hover,.si:active{background:var(--navy3);border-color:rgba(255,255,255,.12)}
-.sd{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.sa{margin-left:auto;color:var(--w3);font-size:14px}
-.rc{display:none;margin:0 16px 16px;background:var(--navy3);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:18px;animation:fu .25s ease}
+.si{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:15px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--text);transition:all .15s;text-align:left;box-shadow:var(--shadow);font-weight:500}
+.si:hover{background:#f9fafb}.sd{width:8px;height:8px;border-radius:50%;flex-shrink:0}.sa{margin-left:auto;color:#cbd5e1;font-size:14px}
+.rc{display:none;margin:0 16px 16px;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:var(--r);padding:18px;animation:su .25s ease;box-shadow:var(--shadow)}
 .rc.show{display:block}
-.rct{font-size:14px;font-weight:600;margin-bottom:14px;color:var(--w9)}
-.rs{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);align-items:flex-start}
-.rs:last-of-type{border-bottom:none}
-.sn{width:22px;height:22px;background:#1a3a6a;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.st{font-size:13px;color:var(--w6);line-height:1.55;flex:1}
-.rw{margin-top:12px;padding:10px 12px;background:rgba(255,69,58,.08);border-radius:8px;font-size:12px;color:#ff6b63;line-height:1.5}
+.rct{font-size:15px;font-weight:700;margin-bottom:14px}
+.rs{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);align-items:flex-start}.rs:last-of-type{border-bottom:none}
+.sn{width:24px;height:24px;background:var(--blue);color:#fff;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.st{font-size:13px;color:var(--sub);line-height:1.55;flex:1}.st strong{color:var(--text);display:block;margin-bottom:3px}
+.rw{margin-top:12px;padding:10px 12px;background:var(--red-bg);border-radius:8px;font-size:12px;color:var(--red);line-height:1.5;font-weight:500}
 .cls{padding:0 16px;margin-bottom:16px}
-.cgt{font-size:11px;font-weight:600;color:var(--w3);letter-spacing:.1em;text-transform:uppercase;margin:20px 0 8px}
-.cc{background:var(--navy2);border:1px solid rgba(255,255,255,.06);border-radius:var(--rs);overflow:hidden}
-.ci2{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .15s}
-.ci2:last-child{border-bottom:none}.ci2:hover{background:var(--w1)}
-.cir{width:22px;height:22px;border:1.5px solid rgba(255,255,255,.2);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px}
-.ci2.ck .cir{background:var(--green);border-color:var(--green)}
-.ci2.ck .cir::after{content:'✓';color:#fff;font-size:12px;font-weight:700}
-.ctxt{font-size:13px;color:var(--w9);line-height:1.5;transition:color .15s}
-.ci2.ck .ctxt{color:var(--w3);text-decoration:line-through}
-.cnote{font-size:11px;color:var(--w3);margin-top:2px;font-weight:300}
-.clo{margin:0 16px 24px;background:var(--navy2);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:20px;text-align:center}
-.clot{font-size:14px;color:var(--w6);line-height:2;font-weight:300}
+.cgt{font-size:12px;font-weight:700;color:var(--sub2);letter-spacing:.08em;text-transform:uppercase;margin:20px 0 8px}
+.cc{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);overflow:hidden;box-shadow:var(--shadow)}
+.ci2{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
+.ci2:last-child{border-bottom:none}.ci2:hover{background:#f9fafb}
+.cir{width:24px;height:24px;border:2px solid #d1d5db;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px}
+.ci2.ck .cir{background:var(--blue);border-color:var(--blue)}.ci2.ck .cir::after{content:'✓';color:#fff;font-size:13px;font-weight:700}
+.ctxt{font-size:13px;color:var(--text);line-height:1.5;font-weight:500}.ci2.ck .ctxt{color:var(--sub2);text-decoration:line-through}
+.cnote{font-size:11px;color:var(--sub2);margin-top:2px}
+.clo{margin:0 16px 24px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center;box-shadow:var(--shadow)}
+.clot{font-size:14px;color:var(--sub);line-height:2}
+.tip{margin-top:12px;padding:12px 14px;background:var(--blue-light);border:1px solid rgba(37,99,235,.1);border-radius:10px;font-size:12px;color:#1e40af;line-height:1.6}.tip strong{font-weight:700}
 </style>
 <script>
-function showCategory(id){
-  document.getElementById('home').style.display='none';
-  document.getElementById('mv').style.display='block';
-  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-}
-function showPanel(id){
-  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-}
-function goHome(){
-  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
-  document.getElementById('mv').style.display='none';
-  document.getElementById('home').style.display='block';
-  window.scrollTo(0,0);
-}
-function goBack(){
-  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});
-  document.querySelectorAll('.rc').forEach(function(r){r.classList.remove('show')});
-  document.getElementById('dui-main').classList.add('active');
-  window.scrollTo(0,0);
-}
+function showCategory(id){document.getElementById('home').style.display='none';document.getElementById('mv').style.display='block';document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+function showPanel(id){document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+function goHome(){document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});document.getElementById('mv').style.display='none';document.getElementById('home').style.display='block';window.scrollTo(0,0)}
+function goBack(){document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});document.querySelectorAll('.rc').forEach(function(r){r.classList.remove('show')});document.getElementById('dui-main').classList.add('active');window.scrollTo(0,0)}
 function showR(id){var p=document.getElementById(id).closest('.panel');p.querySelectorAll('.rc').forEach(function(r){r.classList.remove('show')});var t=document.getElementById(id);t.classList.add('show');setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'nearest'})},100)}
 function ck(el){el.classList.toggle('ck')}
 function selD(t,b){document.querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});b.classList.add('active');window._cs={t:t,d:null,w:null,h:null};document.getElementById('ww').style.display='none';document.getElementById('tw').style.display='none';document.getElementById('br').classList.remove('show');var A={soju:{l:['1잔','2잔','3잔','4잔','반병(5잔)','1병(7잔)','1.5병+'],v:[1,2,3,4,5,7,10]},beer:{l:['1캔','2캔','3캔','4캔','6캔','8캔+'],v:[1,2,3,4,6,8]},wine:{l:['1잔','2잔','3잔','반병(4잔)','1병(6잔)'],v:[1,2,3,4,6]},mak:{l:['1사발','2사발','3사발','4사발','1통+'],v:[1,2,3,4,5]}};var ap=document.getElementById('ap');ap.innerHTML=A[t].l.map(function(l,i){return '<button class="pill" onclick="selA('+A[t].v[i]+',this)">'+l+'</button>'}).join('');document.getElementById('aw').style.display='block'}
 function selA(v,b){b.closest('.pg').querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});b.classList.add('active');window._cs.d=v;document.getElementById('ww').style.display='block'}
 function selW(v,b){b.closest('.pg').querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});b.classList.add('active');window._cs.w=v;document.getElementById('tw').style.display='block'}
 function selT(v,b){b.closest('.pg').querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});b.classList.add('active');window._cs.h=v;doCalc()}
-function doCalc(){var cs=window._cs;if(!cs||!cs.t||!cs.d||!cs.w||cs.h===null)return;var G={soju:7.11,beer:19.75,wine:15.80,mak:9.48};var a=cs.d*G[cs.t],r=a/(cs.w*.7*10),bac=Math.max(0,r-.015*cs.h),rem=bac>0?Math.max(0,bac/.015).toFixed(1):0;var nEl=document.getElementById('bv'),bEl=document.getElementById('bb'),tEl=document.getElementById('bt');nEl.textContent=bac.toFixed(3)+'%';if(bac<.001){nEl.style.color='#34c759';bEl.className='bb safe';bEl.textContent='✅ 운전 가능 수준';tEl.textContent=''}else if(bac<.03){nEl.style.color='#ff9f0a';bEl.className='bb warn';bEl.textContent='⚠️ 주의 구간';tEl.textContent='안전 운전까지 약 '+rem+'시간'}else if(bac<.08){nEl.style.color='#ff9f0a';bEl.className='bb warn';bEl.textContent='🟡 면허정지 구간';tEl.textContent='안전 운전까지 '+rem+'시간'}else if(bac<.2){nEl.style.color='#ff453a';bEl.className='bb danger';bEl.textContent='🔴 면허취소 + 형사처벌';tEl.textContent='안전 운전까지 '+rem+'시간'}else{nEl.style.color='#ff453a';bEl.className='bb critical';bEl.textContent='🚨 위험 수준';tEl.textContent='안전 운전까지 '+rem+'시간'}document.getElementById('br').classList.add('show')}
+function doCalc(){var cs=window._cs;if(!cs||!cs.t||!cs.d||!cs.w||cs.h===null)return;var G={soju:7.11,beer:19.75,wine:15.80,mak:9.48};var a=cs.d*G[cs.t],r=a/(cs.w*.7*10),bac=Math.max(0,r-.015*cs.h),rem=bac>0?Math.max(0,bac/.015).toFixed(1):0;var nEl=document.getElementById('bv'),bEl=document.getElementById('bb'),tEl=document.getElementById('bt');nEl.textContent=bac.toFixed(3)+'%';if(bac<.001){nEl.style.color='#10b981';bEl.className='bb safe';bEl.textContent='✅ 운전 가능 수준';tEl.textContent=''}else if(bac<.03){nEl.style.color='#f59e0b';bEl.className='bb warn';bEl.textContent='⚠️ 주의 구간';tEl.textContent='안전 운전까지 약 '+rem+'시간'}else if(bac<.08){nEl.style.color='#f59e0b';bEl.className='bb warn';bEl.textContent='🟡 면허정지 구간';tEl.textContent='안전 운전까지 '+rem+'시간'}else if(bac<.2){nEl.style.color='#ef4444';bEl.className='bb danger';bEl.textContent='🔴 면허취소 + 형사처벌';tEl.textContent='안전 운전까지 '+rem+'시간'}else{nEl.style.color='#ef4444';bEl.className='bb critical';bEl.textContent='🚨 위험 수준';tEl.textContent='안전 운전까지 '+rem+'시간'}document.getElementById('br').classList.add('show')}
 window._cs={t:null,d:null,w:null,h:null};
 </script>
 </head>
@@ -151,35 +122,29 @@ window._cs={t:null,d:null,w:null,h:null};
   <!-- ═══ HOME: 카테고리 선택 ═══ -->
   <div id="home">
     <div class="hdr">
-      <div class="badge">개인정보 수집 없음 · 기록 저장 없음</div>
+      <div class="badge">24시간 긴급 상담 대기 중</div>
       <h1 class="ttl">안심하십시오</h1>
       <p class="sub">지금 상황에 맞는 긴급 대응을 선택하세요.</p>
     </div>
-
     <div class="sec-t">사건 유형을 선택하세요</div>
     <div class="phase-list">
       <div class="pc" onclick="showCategory('dui-main')" style="padding:22px 20px">
-        <div class="pi" style="background:rgba(255,159,10,.15);width:52px;height:52px;border-radius:14px;font-size:24px">🚗</div>
+        <div class="pi" style="background:#fff7ed;width:52px;height:52px;border-radius:14px;font-size:24px">🚗</div>
         <div style="flex:1"><div class="pn" style="font-size:17px;margin-bottom:5px">금주운전</div><div class="pd">운전 직전·주행 중·검문·사고·사건 이후 대응</div></div>
         <div class="pa">›</div>
       </div>
       <div class="pc" onclick="showCategory('sc-main')" style="padding:22px 20px">
-        <div class="pi" style="background:rgba(255,69,58,.15);width:52px;height:52px;border-radius:14px;font-size:24px">🔴</div>
-        <div style="flex:1"><div class="pn" style="font-size:17px;margin-bottom:5px">성범죄 긴급대응</div><div class="pd">피해·가해 지목·협박·수사 개시 즉각 대응</div></div>
+        <div class="pi" style="background:#fef2f2;width:52px;height:52px;border-radius:14px;font-size:24px">🛡️</div>
+        <div style="flex:1"><div class="pn" style="font-size:17px;margin-bottom:5px">성범죄</div><div class="pd">피해·가해 지목·협박·수사 개시 즉각 대응</div></div>
         <div class="pa">›</div>
       </div>
     </div>
-
     <div class="ca">
       <a href="https://cholawyer.github.io/divine-justice/" target="_blank" class="cb1">⚖️ 변호사 상담 바로가기</a>
-      <a href="tel:01025020208" class="cb2">📱 010-2502-0208 전화 연결</a>
+      <a href="tel:01025020208" class="cb2">📞 010-2502-0208 전화 연결</a>
       <div class="cn">수습할 수 없을 만큼 일이 커졌다면 상담 신청하세요</div>
     </div>
-
-    <div class="ftr">
-      <div class="fn">조장현 변호사</div>
-      <div class="fi">前 부장판사 (영장 전담)<br>서울 서초구 서초대로49길 12, 201호<br>010-2502-0208</div>
-    </div>
+    <div class="ftr"><div class="fn">조장현 변호사</div><div class="fi">前 부장판사 (영장 전담)<br>서울 서초구 서초대로49길 12, 201호<br>010-2502-0208</div></div>
   </div>
 
   <div id="mv" style="display:none">
@@ -187,7 +152,7 @@ window._cs={t:null,d:null,w:null,h:null};
   <!-- ═══ DUI 메인 ═══ -->
   <div class="panel" id="dui-main">
     <div class="ph"><button class="bb-btn" onclick="goHome()">‹</button><div class="pt">금주운전 긴급대응</div></div>
-    <div style="padding:0 24px 8px;font-size:12px;color:var(--w3);letter-spacing:.04em">지금 어떤 상황인가요</div>
+    <div style="padding:0 24px 8px;font-size:12px;color:var(--sub2);letter-spacing:.04em">지금 어떤 상황인가요</div>
     <div class="phase-list">
       <div class="pc" onclick="showPanel('p1')">
         <div class="pi g">🟢</div>
@@ -266,10 +231,10 @@ window._cs={t:null,d:null,w:null,h:null};
     <div class="ab"><div class="at">⚠ 지금 절대 하지 마세요</div><div class="ai">시동 켠 채 운전석에서 잠들지 마세요</div><div class="ai">차를 조금이라도 움직이지 마세요</div><div class="ai">커피·해장국으로 알코올을 빼려 하지 마세요</div><div class="ai">"짧은 거리니까 괜찮겠지"라고 판단하지 마세요</div></div>
     <div class="sec-t">지금 상황을 선택하세요</div>
     <div class="sl">
-      <button class="si" onclick="showR('r1a')"><div class="sd" style="background:#ff9f0a"></div>대리 대기 중 · 운전석 탑승<div class="sa">›</div></button>
-      <button class="si" onclick="showR('r1b')"><div class="sd" style="background:#ff453a"></div>내가 직접 운전할까 고민 중<div class="sa">›</div></button>
-      <button class="si" onclick="showR('r1c')"><div class="sd" style="background:#ff453a"></div>발렛 · 주차 이동 요청받음<div class="sa">›</div></button>
-      <button class="si" onclick="showR('r1d')"><div class="sd" style="background:#bf5af2"></div>대리기사가 중간에 내려버림<div class="sa">›</div></button>
+      <button class="si" onclick="showR('r1a')"><div class="sd" style="background:#f59e0b"></div>대리 대기 중 · 운전석 탑승<div class="sa">›</div></button>
+      <button class="si" onclick="showR('r1b')"><div class="sd" style="background:#ef4444"></div>내가 직접 운전할까 고민 중<div class="sa">›</div></button>
+      <button class="si" onclick="showR('r1c')"><div class="sd" style="background:#ef4444"></div>발렛 · 주차 이동 요청받음<div class="sa">›</div></button>
+      <button class="si" onclick="showR('r1d')"><div class="sd" style="background:#8b5cf6"></div>대리기사가 중간에 내려버림<div class="sa">›</div></button>
     </div>
     <div class="rc" id="r1a"><div class="rct">🟡 운전석 탑승은 합법 — 이것만 지키세요</div><div class="rs"><div class="sn">1</div><div class="st">시동을 즉시 끄세요 — 에어컨·히터를 위해 켜는 순간 음주운전 성립</div></div><div class="rs"><div class="sn">2</div><div class="st">조수석 또는 뒷좌석으로 이동하세요</div></div><div class="rs"><div class="sn">3</div><div class="st">차 키를 가방에 넣어두세요 — 손에 쥔 채 운전석 = 운전 의사로 해석</div></div></div>
     <div class="rc" id="r1b"><div class="rct">🔴 운전하면 안 됩니다 — 지금 대리운전을 부르세요</div><div class="rs"><div class="sn">1</div><div class="st">카카오T · 티맵 대리운전 지금 켜세요</div></div><div class="rs"><div class="sn">2</div><div class="st">앱 안 되면 📞 1588-0365 (24시간 대리운전 콜센터)</div></div><div class="rs"><div class="sn">3</div><div class="st">차는 오늘 여기 두고 내일 찾으세요</div></div><div class="rw">⚠️ 면허취소 · 형사입건 · 전과 기록 · 보험 면책</div></div>
@@ -284,10 +249,10 @@ window._cs={t:null,d:null,w:null,h:null};
     <div class="ab"><div class="at">⚠ 지금 절대 하지 마세요</div><div class="ai">도주하지 마세요 — 도주죄 추가 + 무기징역 가능</div><div class="ai">접촉사고 후 자리를 피하지 마세요 — 뺑소니 = 실형</div><div class="ai">사고 후 피해자에게 직접 합의를 시도하지 마세요</div><div class="ai">블랙박스를 지금 삭제하지 마세요 — 증거 인멸죄</div></div>
     <div class="sec-t">지금 상황을 선택하세요</div>
     <div class="sl">
-      <button class="si" onclick="showR('r2a')"><div class="sd" style="background:#ff453a"></div>경찰차가 뒤에서 따라옴<div class="sa">›</div></button>
-      <button class="si" onclick="showR('r2b')"><div class="sd" style="background:#ff453a"></div>접촉사고 — 인명피해 있음<div class="sa">›</div></button>
-      <button class="si" onclick="showR('r2c')"><div class="sd" style="background:#ff9f0a"></div>접촉사고 — 물적 피해만<div class="sa">›</div></button>
-      <button class="si" onclick="showR('r2d')"><div class="sd" style="background:#34c759"></div>단속 없음, 지금 멈출 수 있음<div class="sa">›</div></button>
+      <button class="si" onclick="showR('r2a')"><div class="sd" style="background:#ef4444"></div>경찰차가 뒤에서 따라옴<div class="sa">›</div></button>
+      <button class="si" onclick="showR('r2b')"><div class="sd" style="background:#ef4444"></div>접촉사고 — 인명피해 있음<div class="sa">›</div></button>
+      <button class="si" onclick="showR('r2c')"><div class="sd" style="background:#f59e0b"></div>접촉사고 — 물적 피해만<div class="sa">›</div></button>
+      <button class="si" onclick="showR('r2d')"><div class="sd" style="background:#10b981"></div>단속 없음, 지금 멈출 수 있음<div class="sa">›</div></button>
     </div>
     <div class="rc" id="r2a"><div class="rct">✅ 지금 순서대로 따르세요</div><div class="rs"><div class="sn">1</div><div class="st">비상등 켜기</div></div><div class="rs"><div class="sn">2</div><div class="st">갓길로 천천히 이동</div></div><div class="rs"><div class="sn">3</div><div class="st">완전 정차 후 시동 끄기</div></div><div class="rs"><div class="sn">4</div><div class="st">창문 열고 손 보이기</div></div><div class="rw">⚠️ 도주 시 음주운전 + 도주죄 추가 / 도주 중 사고 = 최대 무기징역</div></div>
     <div class="rc" id="r2b"><div class="rct">🚨 절대 도주 금지 — 순서대로 따르세요</div><div class="rs"><div class="sn">1</div><div class="st">즉시 정차·비상등</div></div><div class="rs"><div class="sn">2</div><div class="st">부상자 확인 → 119 신고</div></div><div class="rs"><div class="sn">3</div><div class="st">112 신고 — 본인이 먼저 (자수 효과)</div></div><div class="rs"><div class="sn">4</div><div class="st">상대방 연락처·차량번호 교환</div></div><div class="rs"><div class="sn">5</div><div class="st">현장 사진 촬영 / 보험사 연락</div></div><div class="rw">⚠️ 특가법 적용 · 구속 위험 · 즉시 변호사 선임 필요</div></div>
@@ -302,15 +267,15 @@ window._cs={t:null,d:null,w:null,h:null};
     <div class="ab"><div class="at">⚠ 지금 절대 하지 마세요</div><div class="ai">측정을 거부하지 마세요 — 거부가 더 무겁게 처벌됩니다</div><div class="ai">"얼마나 마셨는지" 자세히 말하지 마세요</div><div class="ai">서류에 내용 확인 없이 서명하지 마세요</div><div class="ai">현장에서 피해자와 단독으로 합의를 시도하지 마세요</div></div>
     <div class="sec-t">지금 상황을 선택하세요</div>
     <div class="sl">
-      <button class="si" onclick="showR('r3a')"><div class="sd" style="background:#ff9f0a"></div>음주측정 요구받음<div class="sa">›</div></button>
-      <button class="si" onclick="showR('r3b')"><div class="sd" style="background:#ff453a"></div>측정 거부하고 싶음<div class="sa">›</div></button>
+      <button class="si" onclick="showR('r3a')"><div class="sd" style="background:#f59e0b"></div>음주측정 요구받음<div class="sa">›</div></button>
+      <button class="si" onclick="showR('r3b')"><div class="sd" style="background:#ef4444"></div>측정 거부하고 싶음<div class="sa">›</div></button>
       <button class="si" onclick="showR('r3c')"><div class="sd" style="background:#6ab4ff"></div>채혈 요청 — 판단이 필요함<div class="sa">›</div></button>
-      <button class="si" onclick="showR('r3d')"><div class="sd" style="background:#ff9f0a"></div>수치 나왔고 현장 조사 중<div class="sa">›</div></button>
+      <button class="si" onclick="showR('r3d')"><div class="sd" style="background:#f59e0b"></div>수치 나왔고 현장 조사 중<div class="sa">›</div></button>
     </div>
     <div class="rc" id="r3a"><div class="rct">🟡 측정에 응하는 것이 거의 항상 유리합니다</div><div class="rs"><div class="sn">1</div><div class="st">침착하게 측정에 응하세요</div></div><div class="rs"><div class="sn">2</div><div class="st">수치에 이의 있으면 즉시 "혈액 채혈을 요청합니다"</div></div><div class="rs"><div class="sn">3</div><div class="st">단속 시간·위치·측정 방법 메모 또는 녹음</div></div><div class="rs"><div class="sn">4</div><div class="st">불리한 진술 자발적으로 하지 마세요</div></div><div class="rw">거부 시 1~5년 이하 징역 또는 2천만 원 이하 벌금 / 면허취소 3년 즉시</div></div>
     <div class="rc" id="r3b"><div class="rct">🔴 측정 거부 = 음주운전보다 더 무거운 처벌</div><div class="rs"><div class="sn">1</div><div class="st">아직 거부 전이라면 → 즉시 마음 바꾸고 측정에 응하세요</div></div><div class="rs"><div class="sn">2</div><div class="st">이미 거부했다면 → 추가 진술 멈추고 변호사 즉시 선임</div></div><div class="rw">⚠️ 면허취소 3년 · 가중처벌 확정</div></div>
-    <div class="rc" id="r3c"><div class="rct">🔵 채혈 유불리 — 경과 시간이 결정합니다</div><div class="rs"><div class="sn" style="font-size:9px;background:#ff453a">↑</div><div class="st">방금~1시간 → 상승기, 채혈 비권장 (수치가 더 높게 나올 수 있음)</div></div><div class="rs"><div class="sn" style="font-size:9px;background:#ff9f0a">?</div><div class="st">1~2시간 → 불확실, 혼자 판단 금지 — 즉시 변호사 전화</div></div><div class="rs"><div class="sn" style="font-size:9px;background:#34c759">↓</div><div class="st">2시간+ → 하강기, 채혈 권장 (호흡측정보다 낮게 나올 확률 높음)</div></div><div class="rw">⚠️ 1시간 이내라면 절대 혼자 판단하지 마세요</div></div>
-    <div class="rc" id="r3d"><div class="rct">🟡 현장 진술은 모두 증거 — 이 한마디만 하세요</div><div class="rs"><div class="sn">✓</div><div class="st" style="font-weight:600;color:var(--w9)">"변호인 선임 후 진술하겠습니다."</div></div><div class="rs"><div class="sn">1</div><div class="st">얼마나·어디서·무엇을 마셨는지 자세히 말하지 마세요</div></div><div class="rs"><div class="sn">2</div><div class="st">서류 서명 전 내용 반드시 확인</div></div><div class="rs"><div class="sn">3</div><div class="st">단속 시간·장소·경찰관 언행 메모</div></div></div>
+    <div class="rc" id="r3c"><div class="rct">🔵 채혈 유불리 — 경과 시간이 결정합니다</div><div class="rs"><div class="sn" style="font-size:9px;background:#ef4444">↑</div><div class="st">방금~1시간 → 상승기, 채혈 비권장 (수치가 더 높게 나올 수 있음)</div></div><div class="rs"><div class="sn" style="font-size:9px;background:#f59e0b">?</div><div class="st">1~2시간 → 불확실, 혼자 판단 금지 — 즉시 변호사 전화</div></div><div class="rs"><div class="sn" style="font-size:9px;background:#10b981">↓</div><div class="st">2시간+ → 하강기, 채혈 권장 (호흡측정보다 낮게 나올 확률 높음)</div></div><div class="rw">⚠️ 1시간 이내라면 절대 혼자 판단하지 마세요</div></div>
+    <div class="rc" id="r3d"><div class="rct">🟡 현장 진술은 모두 증거 — 이 한마디만 하세요</div><div class="rs"><div class="sn">✓</div><div class="st" style="font-weight:600;color:var(--text)">"변호인 선임 후 진술하겠습니다."</div></div><div class="rs"><div class="sn">1</div><div class="st">얼마나·어디서·무엇을 마셨는지 자세히 말하지 마세요</div></div><div class="rs"><div class="sn">2</div><div class="st">서류 서명 전 내용 반드시 확인</div></div><div class="rs"><div class="sn">3</div><div class="st">단속 시간·장소·경찰관 언행 메모</div></div></div>
     <div class="ca"><a href="https://cholawyer.github.io/divine-justice/" target="_blank" class="cb1">⚖️ 변호사 상담 바로가기</a><a href="tel:01025020208" class="cb2">📱 010-2502-0208 전화 연결</a><div class="cn">수습할 수 없을 만큼 일이 커졌다면 상담 신청하세요</div></div>
   </div>
 
@@ -346,8 +311,8 @@ window._cs={t:null,d:null,w:null,h:null};
 
   <!-- ═══ 성범죄 메인 선택 ═══ -->
   <div class="panel" id="sc-main">
-    <div class="ph"><button class="bb-btn" onclick="goHome()">‹</button><div class="pt">성범죄 긴급대응</div><div class="pbg r">긴급</div></div>
-    <div style="padding:0 16px 8px;font-size:12px;color:var(--w3);letter-spacing:.04em">지금 어떤 상황인가요</div>
+    <div class="ph"><button class="bb-btn" onclick="goHome()">‹</button><div class="pt">성범죄</div><div class="pbg r">긴급</div></div>
+    <div style="padding:0 16px 8px;font-size:12px;color:var(--sub2);letter-spacing:.04em">지금 어떤 상황인가요</div>
     <div class="phase-list" style="margin-bottom:16px">
       <div class="pc" onclick="showPanel('sc-victim')">
         <div class="pi r">🔴</div>
@@ -380,8 +345,8 @@ window._cs={t:null,d:null,w:null,h:null};
     <div class="ab"><div class="at">⚠ 지금 절대 하지 마세요</div><div class="ai">샤워·세탁 금지 — DNA 증거가 사라집니다</div><div class="ai">상대방 연락에 답변 금지 — 화면 녹화로 기록만 하세요</div><div class="ai">혼자 합의 시도 금지 — 2차 피해 위험</div></div>
     <div class="sec-t">지금 순서대로 따르세요</div>
     <div style="padding:0 16px;margin-bottom:16px">
-      <div class="rc show" style="margin:0 0 10px"><div class="rs"><div class="sn">1</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">몸 그대로 해바라기센터 또는 응급실</strong>씻지 말고 입었던 옷 그대로. 전국 해바라기센터 ☎ 117</div></div><div class="rs"><div class="sn">2</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">상대방 메시지 화면 녹화</strong>캡처는 조작 시비 가능 — 화면 녹화가 법적으로 더 강력합니다</div></div><div class="rs"><div class="sn">3</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">사건 당일 상황 메모</strong>시간·장소·경위·목격자 — 기억이 생생한 지금 바로</div></div><div class="rs"><div class="sn">4</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">변호사 상담</strong>피해 회복 목표인지, 엄벌이 목표인지 전략부터 세우세요</div></div>
-      <div style="margin-top:12px;padding:10px 12px;background:rgba(30,111,207,.1);border-radius:8px;font-size:12px;color:#6ab4ff;line-height:1.6">💡 <strong>2026 포렌식 팁</strong> — 상대방이 메시지를 삭제하기 전에 화면 녹화를 하세요. 녹화 파일은 메타데이터까지 남아 증거 효력이 훨씬 강합니다.</div></div>
+      <div class="rc show" style="margin:0 0 10px"><div class="rs"><div class="sn">1</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">몸 그대로 해바라기센터 또는 응급실</strong>씻지 말고 입었던 옷 그대로. 전국 해바라기센터 ☎ 117</div></div><div class="rs"><div class="sn">2</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">상대방 메시지 화면 녹화</strong>캡처는 조작 시비 가능 — 화면 녹화가 법적으로 더 강력합니다</div></div><div class="rs"><div class="sn">3</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">사건 당일 상황 메모</strong>시간·장소·경위·목격자 — 기억이 생생한 지금 바로</div></div><div class="rs"><div class="sn">4</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">변호사 상담</strong>피해 회복 목표인지, 엄벌이 목표인지 전략부터 세우세요</div></div>
+      <div style="margin-top:12px;padding:10px 12px;background:var(--blue-light);border-radius:8px;font-size:12px;color:#1e40af;line-height:1.6">💡 <strong>2026 포렌식 팁</strong> — 상대방이 메시지를 삭제하기 전에 화면 녹화를 하세요. 녹화 파일은 메타데이터까지 남아 증거 효력이 훨씬 강합니다.</div></div>
     </div>
     <div class="ca"><a href="https://cholawyer.github.io/divine-justice/" target="_blank" class="cb1">도움이 필요하다면</a><a href="tel:01025020208" class="cb2">📱 010-2502-0208 즉시 전화</a><div class="cn">수습할 수 없을 만큼 일이 커졌다면 상담 신청하세요</div></div>
     <div class="ftr"><div class="fn">조장현 변호사</div><div class="fi">前 부장판사 (영장 전담)<br>서울 서초구 서초대로49길 12, 201호</div></div>
@@ -393,8 +358,8 @@ window._cs={t:null,d:null,w:null,h:null};
     <div class="ab"><div class="at">⚠ 지금 절대 하지 마세요</div><div class="ai">사과 문자 금지 — "미안해" 한마디가 자백입니다</div><div class="ai">카톡 삭제 금지 — 증거 인멸로 역이용됩니다</div><div class="ai">단둘이 만나서 해결 시도 금지</div></div>
     <div class="sec-t">지금 순서대로 따르세요</div>
     <div style="padding:0 16px;margin-bottom:16px">
-      <div class="rc show" style="margin:0 0 10px"><div class="rs"><div class="sn">1</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">카톡·문자 전체 클라우드 백업</strong>삭제하지 말고 백업 — 대화 흐름 전체가 맥락 증거입니다</div></div><div class="rs"><div class="sn">2</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">당일 동선 증거 확보</strong>결제내역·구글 타임라인·CCTV 위치 메모</div></div><div class="rs"><div class="sn">3</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">스마트워치 데이터 백업</strong>심박수·이동 경로 — 2026년 법원에서 정황 증거로 채택</div></div><div class="rs"><div class="sn">4</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">즉시 변호사 선임</strong>첫 진술 전에 반드시 — 초기 진술이 재판까지 갑니다</div></div>
-      <div style="margin-top:12px;padding:10px 12px;background:rgba(30,111,207,.1);border-radius:8px;font-size:12px;color:#6ab4ff;line-height:1.6">💡 <strong>핵심 포인트</strong> — 상대방 연락은 차단 전 마지막 메시지까지 화면 녹화로 저장하세요. 먼저 연락해온 기록이 역으로 방어 증거가 됩니다.</div></div>
+      <div class="rc show" style="margin:0 0 10px"><div class="rs"><div class="sn">1</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">카톡·문자 전체 클라우드 백업</strong>삭제하지 말고 백업 — 대화 흐름 전체가 맥락 증거입니다</div></div><div class="rs"><div class="sn">2</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">당일 동선 증거 확보</strong>결제내역·구글 타임라인·CCTV 위치 메모</div></div><div class="rs"><div class="sn">3</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">스마트워치 데이터 백업</strong>심박수·이동 경로 — 2026년 법원에서 정황 증거로 채택</div></div><div class="rs"><div class="sn">4</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">즉시 변호사 선임</strong>첫 진술 전에 반드시 — 초기 진술이 재판까지 갑니다</div></div>
+      <div style="margin-top:12px;padding:10px 12px;background:var(--blue-light);border-radius:8px;font-size:12px;color:#1e40af;line-height:1.6">💡 <strong>핵심 포인트</strong> — 상대방 연락은 차단 전 마지막 메시지까지 화면 녹화로 저장하세요. 먼저 연락해온 기록이 역으로 방어 증거가 됩니다.</div></div>
     </div>
     <div class="ca"><a href="https://cholawyer.github.io/divine-justice/" target="_blank" class="cb1">도움이 필요하다면</a><a href="tel:01025020208" class="cb2">📱 010-2502-0208 즉시 전화</a><div class="cn">수습할 수 없을 만큼 일이 커졌다면 상담 신청하세요</div></div>
     <div class="ftr"><div class="fn">조장현 변호사</div><div class="fi">前 부장판사 (영장 전담)<br>서울 서초구 서초대로49길 12, 201호</div></div>
@@ -402,12 +367,12 @@ window._cs={t:null,d:null,w:null,h:null};
 
   <!-- ═══ SC-P3: 협박 ═══ -->
   <div class="panel" id="sc-threat">
-    <div class="ph"><button class="bb-btn" onclick="showPanel('sc-main')">‹</button><div class="pt">합의·협박 요구받고 있다</div><div class="pbg" style="background:rgba(255,159,10,.2);color:#ff9f0a">긴급</div></div>
+    <div class="ph"><button class="bb-btn" onclick="showPanel('sc-main')">‹</button><div class="pt">합의·협박 요구받고 있다</div><div class="pbg" style="background:#fff7ed;color:#f59e0b">긴급</div></div>
     <div class="ab"><div class="at">⚠ 지금 절대 하지 마세요</div><div class="ai">합의금 바로 송금 금지 — 인정으로 해석됩니다</div><div class="ai">녹취 없이 전화 대화 금지</div><div class="ai">혼자 경찰서 출석 금지</div></div>
     <div class="sec-t">지금 순서대로 따르세요</div>
     <div style="padding:0 16px;margin-bottom:16px">
-      <div class="rc show" style="margin:0 0 10px"><div class="rs"><div class="sn">1</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">요구 금액·입금 계좌 화면 캡처</strong>공갈죄의 명백한 증거 — 지금 바로 저장하세요</div></div><div class="rs"><div class="sn">2</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">모든 통화 자동 녹음 켜기</strong>전화 피하지 마세요 — 상대방 발언 자체가 역공 재료입니다</div></div><div class="rs"><div class="sn">3</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">알리바이 증거 수집</strong>당일 결제내역·위치기록·목격자 확보</div></div><div class="rs"><div class="sn">4</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">변호사 선임 후 대응 매뉴얼 받기</strong>변호사가 알려주는 방식으로만 응대 — 혼자 판단 금지</div></div>
-      <div style="margin-top:12px;padding:10px 12px;background:rgba(30,111,207,.1);border-radius:8px;font-size:12px;color:#6ab4ff;line-height:1.6">💡 <strong>역공 포인트</strong> — 요구 금액과 계좌번호가 확보되면 공갈죄로 역고소가 가능합니다. 먼저 주지 마세요.</div></div>
+      <div class="rc show" style="margin:0 0 10px"><div class="rs"><div class="sn">1</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">요구 금액·입금 계좌 화면 캡처</strong>공갈죄의 명백한 증거 — 지금 바로 저장하세요</div></div><div class="rs"><div class="sn">2</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">모든 통화 자동 녹음 켜기</strong>전화 피하지 마세요 — 상대방 발언 자체가 역공 재료입니다</div></div><div class="rs"><div class="sn">3</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">알리바이 증거 수집</strong>당일 결제내역·위치기록·목격자 확보</div></div><div class="rs"><div class="sn">4</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">변호사 선임 후 대응 매뉴얼 받기</strong>변호사가 알려주는 방식으로만 응대 — 혼자 판단 금지</div></div>
+      <div style="margin-top:12px;padding:10px 12px;background:var(--blue-light);border-radius:8px;font-size:12px;color:#1e40af;line-height:1.6">💡 <strong>역공 포인트</strong> — 요구 금액과 계좌번호가 확보되면 공갈죄로 역고소가 가능합니다. 먼저 주지 마세요.</div></div>
     </div>
     <div class="ca"><a href="https://cholawyer.github.io/divine-justice/" target="_blank" class="cb1">도움이 필요하다면</a><a href="tel:01025020208" class="cb2">📱 010-2502-0208 즉시 전화</a><div class="cn">수습할 수 없을 만큼 일이 커졌다면 상담 신청하세요</div></div>
     <div class="ftr"><div class="fn">조장현 변호사</div><div class="fi">前 부장판사 (영장 전담)<br>서울 서초구 서초대로49길 12, 201호</div></div>
@@ -419,12 +384,21 @@ window._cs={t:null,d:null,w:null,h:null};
     <div class="ab"><div class="at">⚠ 지금 절대 하지 마세요</div><div class="ai">혼자 첫 진술 금지 — 수사관은 당신 편이 아닙니다</div><div class="ai">상대방에게 직접 연락 금지</div><div class="ai">고소 내용 모른 채 진술 금지</div></div>
     <div class="sec-t">지금 순서대로 따르세요</div>
     <div style="padding:0 16px;margin-bottom:16px">
-      <div class="rc show" style="margin:0 0 10px"><div class="rs"><div class="sn">1</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">이 한마디만 하세요</strong>"변호인과 상담 후 정리해서 말씀드리겠습니다"</div></div><div class="rs"><div class="sn">2</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">소환 일정 최소 3일 뒤로 조율</strong>거부가 아닙니다 — 권리입니다. 준비 시간 확보가 핵심</div></div><div class="rs"><div class="sn">3</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">고소장 내용 파악 후 전략 수립</strong>뭐가 적혔는지 모르면 단 한마디도 하지 마세요</div></div><div class="rs"><div class="sn">4</div><div class="st"><strong style="color:var(--w9);display:block;margin-bottom:3px">즉시 변호사 선임</strong>수사 초기 개입이 형량에 결정적입니다</div></div>
-      <div style="margin-top:12px;padding:10px 12px;background:rgba(30,111,207,.1);border-radius:8px;font-size:12px;color:#6ab4ff;line-height:1.6">💡 <strong>진술 거부권</strong> — 무조건 침묵이 아닙니다. "변호인 상담 후 정리해서 말씀드리겠다"는 정중한 거절이 법적으로 가장 안전합니다.</div></div>
+      <div class="rc show" style="margin:0 0 10px"><div class="rs"><div class="sn">1</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">이 한마디만 하세요</strong>"변호인과 상담 후 정리해서 말씀드리겠습니다"</div></div><div class="rs"><div class="sn">2</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">소환 일정 최소 3일 뒤로 조율</strong>거부가 아닙니다 — 권리입니다. 준비 시간 확보가 핵심</div></div><div class="rs"><div class="sn">3</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">고소장 내용 파악 후 전략 수립</strong>뭐가 적혔는지 모르면 단 한마디도 하지 마세요</div></div><div class="rs"><div class="sn">4</div><div class="st"><strong style="color:var(--text);display:block;margin-bottom:3px">즉시 변호사 선임</strong>수사 초기 개입이 형량에 결정적입니다</div></div>
+      <div style="margin-top:12px;padding:10px 12px;background:var(--blue-light);border-radius:8px;font-size:12px;color:#1e40af;line-height:1.6">💡 <strong>진술 거부권</strong> — 무조건 침묵이 아닙니다. "변호인 상담 후 정리해서 말씀드리겠다"는 정중한 거절이 법적으로 가장 안전합니다.</div></div>
     </div>
     <div class="ca"><a href="https://cholawyer.github.io/divine-justice/" target="_blank" class="cb1">도움이 필요하다면</a><a href="tel:01025020208" class="cb2">📱 010-2502-0208 즉시 전화</a><div class="cn">수습할 수 없을 만큼 일이 커졌다면 상담 신청하세요</div></div>
     <div class="ftr"><div class="fn">조장현 변호사</div><div class="fi">前 부장판사 (영장 전담)<br>서울 서초구 서초대로49길 12, 201호</div></div>
   </div>
+</div>
+
+
+<!-- Bottom Nav -->
+<div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:440px;background:#fff;border-top:1px solid rgba(0,0,0,.06);display:flex;justify-content:space-around;padding:8px 0 env(safe-area-inset-bottom,8px);z-index:10">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:#2563eb;font-weight:600;padding:4px 14px;cursor:pointer"><div style="font-size:20px">🏠</div>홈</div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:#9ca3af;font-weight:500;padding:4px 14px;cursor:pointer"><div style="font-size:20px">📋</div>가이드</div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:#9ca3af;font-weight:500;padding:4px 14px;cursor:pointer"><div style="font-size:20px">💬</div>상담</div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:#9ca3af;font-weight:500;padding:4px 14px;cursor:pointer"><div style="font-size:20px">👤</div>프로필</div>
 </div>
 
 <script>
