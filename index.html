@@ -113,7 +113,15 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',-apple-sy
 .bv{font-size:48px;font-weight:900;letter-spacing:-.03em;line-height:1;margin-bottom:12px}
 .bb{display:inline-block;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:8px}
 .bb.safe{background:#ecfdf5;color:#10b981}.bb.warn{background:#fff7ed;color:#f59e0b}.bb.danger{background:#fef2f2;color:#ef4444}.bb.critical{background:#fef2f2;color:#ef4444}
-.bt{font-size:12px;color:var(--sub)}
+.bt{font-size:12px;color:var(--sub)}.gauge-wrap{padding:0 4px;margin-bottom:4px;position:relative}.gauge-track{width:100%;height:10px;border-radius:5px;background:linear-gradient(to right,#10b981 0%,#10b981 15%,#fbbf24 15%,#fbbf24 50%,#f97316 50%,#f97316 70%,#ef4444 70%,#ef4444 100%)}.gauge-needle{position:absolute;top:-4px;width:3px;height:18px;background:#1e293b;border-radius:2px;transform:translateX(-50%);transition:left 1s cubic-bezier(.34,1.2,.64,1)}.gauge-needle::after{content:"";position:absolute;bottom:-3px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:#1e293b;border-radius:50%}.gauge-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--sub2);margin-top:4px;padding:0 2px}#bac-viz-wrap{margin:14px 0 8px;background:#f8fafc;border-radius:14px;border:1px solid var(--border);overflow:hidden}#bac-viz{width:100%;display:block}.viz-tip{font-size:12px;color:var(--sub);padding:10px 14px;line-height:1.7;border-top:1px solid var(--border)}
+#bac-viz-wrap{margin:14px 0 8px;background:#f8fafc;border-radius:14px;border:1px solid var(--border);overflow:hidden}
+#bac-viz{width:100%;display:block}
+.gauge-wrap{padding:0 4px;margin-bottom:4px;position:relative}
+.gauge-track{width:100%;height:10px;border-radius:5px;background:linear-gradient(to right,#10b981 0%,#10b981 15%,#fbbf24 15%,#fbbf24 50%,#f97316 50%,#f97316 70%,#ef4444 70%,#ef4444 100%)}
+.gauge-needle{position:absolute;top:-4px;width:3px;height:18px;background:#1e293b;border-radius:2px;transform:translateX(-50%);transition:left 1s cubic-bezier(.34,1.2,.64,1)}
+.gauge-needle::after{content:'';position:absolute;bottom:-3px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:#1e293b;border-radius:50%}
+.gauge-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--sub2);margin-top:4px;padding:0 2px}
+.viz-tip{font-size:12px;color:var(--sub);padding:10px 14px;line-height:1.7;border-top:1px solid var(--border)}
 .ca{padding:24px 16px 0;animation:su .4s ease .4s both}
 .cb1{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--blue);color:#fff;padding:17px;border-radius:var(--r);font-family:'Noto Sans KR',sans-serif;font-size:16px;font-weight:700;text-decoration:none;transition:all .2s;margin-bottom:10px;box-shadow:0 4px 16px rgba(37,99,235,.3)}
 .cb1:hover{background:#1d4ed8}.cb2{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:15px;border-radius:var(--r);font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s;box-shadow:var(--shadow)}
@@ -162,13 +170,153 @@ function goHome(){document.querySelectorAll('.panel').forEach(function(p){p.clas
 function goBack(){document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active')});document.querySelectorAll('.rc').forEach(function(r){r.classList.remove('show')});document.getElementById('dui-main').classList.add('active');window.scrollTo(0,0)}
 function showR(id){var p=document.getElementById(id).closest('.panel');p.querySelectorAll('.rc').forEach(function(r){r.classList.remove('show')});var t=document.getElementById(id);t.classList.add('show');setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'nearest'})},100)}
 function ck(el){el.classList.toggle('ck')}
-function selD(t,b){document.querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});b.classList.add('active');window._cs={t:t,d:null,w:null,h:null};document.getElementById('ww').style.display='none';document.getElementById('tw').style.display='none';document.getElementById('br').classList.remove('show');var A={soju:{l:['1잔','2잔','3잔','4잔','반병(5잔)','1병(7잔)','1.5병+'],v:[1,2,3,4,5,7,10]},beer:{l:['1캔','2캔','3캔','4캔','6캔','8캔+'],v:[1,2,3,4,6,8]},wine:{l:['1잔','2잔','3잔','반병(4잔)','1병(6잔)'],v:[1,2,3,4,6]},mak:{l:['1사발','2사발','3사발','4사발','1통+'],v:[1,2,3,4,5]}};var ap=document.getElementById('ap');ap.innerHTML=A[t].l.map(function(l,i){return '<button class="pill" onclick="selA('+A[t].v[i]+',this)">'+l+'</button>'}).join('');document.getElementById('aw').style.display='block'}
-function selA(v,b){b.closest('.pg').querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});b.classList.add('active');window._cs.d=v;document.getElementById('ww').style.display='block'}
-function selW(v,b){b.closest('.pg').querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});b.classList.add('active');window._cs.w=v;document.getElementById('tw').style.display='block'}
-function selT(v,b){b.closest('.pg').querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});b.classList.add('active');window._cs.h=v;doCalc()}
-function doCalc(){var cs=window._cs;if(!cs||!cs.t||!cs.d||!cs.w||cs.h===null)return;var G={soju:7.11,beer:19.75,wine:15.80,mak:9.48};var a=cs.d*G[cs.t],r=a/(cs.w*.7*10),bac=Math.max(0,r-.015*cs.h),rem=bac>0?Math.max(0,bac/.015).toFixed(1):0;var nEl=document.getElementById('bv'),bEl=document.getElementById('bb'),tEl=document.getElementById('bt');nEl.textContent=bac.toFixed(3)+'%';if(bac<.001){nEl.style.color='#10b981';bEl.className='bb safe';bEl.textContent='✅ 운전 가능 수준';tEl.textContent=''}else if(bac<.03){nEl.style.color='#f59e0b';bEl.className='bb warn';bEl.textContent='⚠️ 주의 구간';tEl.textContent='안전 운전까지 약 '+rem+'시간'}else if(bac<.08){nEl.style.color='#f59e0b';bEl.className='bb warn';bEl.textContent='🟡 면허정지 구간';tEl.textContent='안전 운전까지 '+rem+'시간'}else if(bac<.2){nEl.style.color='#ef4444';bEl.className='bb danger';bEl.textContent='🔴 면허취소 + 형사처벌';tEl.textContent='안전 운전까지 '+rem+'시간'}else{nEl.style.color='#ef4444';bEl.className='bb critical';bEl.textContent='🚨 위험 수준';tEl.textContent='안전 운전까지 '+rem+'시간'}document.getElementById('br').classList.add('show')}
+/* ── 지속 시뮬레이션 — 버블이 현재 위치에서 새 위치로 이동 ── */
+var VIZ = (function(){
+  var sim, svgEl, gGlass, gBac, nodes = [];
+  var W = 0, H = 120;
+  var TYPE_COL = {soju:'#93c5fd',beer:'#fde68a',wine:'#c4b5fd',mak:'#bbf7d0'};
+
+  function bacCol(b){
+    if(b<0.001)return'#10b981';if(b<0.03)return'#6ee7b7';
+    if(b<0.05)return'#fde68a';if(b<0.08)return'#fbbf24';
+    if(b<0.12)return'#f97316';if(b<0.2)return'#ef4444';return'#991b1b';
+  }
+
+  function init(){
+    var el = document.getElementById('bac-viz');
+    if(!el)return;
+    W = el.parentElement.offsetWidth||300;
+    el.setAttribute('viewBox','0 0 '+W+' '+H);
+    el.setAttribute('height',H);
+    svgEl = d3.select('#bac-viz');
+    svgEl.selectAll('*').remove();
+
+    /* 구분선 */
+    svgEl.append('line')
+      .attr('x1',W*0.63).attr('x2',W*0.63)
+      .attr('y1',6).attr('y2',H-6)
+      .attr('stroke','#e2e8f0').attr('stroke-width',1)
+      .attr('stroke-dasharray','3,3');
+    svgEl.append('text').attr('x',W*0.29).attr('y',H-3)
+      .attr('text-anchor','middle').attr('font-size',8).attr('fill','#cbd5e1').text('음주량');
+    svgEl.append('text').attr('x',W*0.82).attr('y',H-3)
+      .attr('text-anchor','middle').attr('font-size',8).attr('fill','#cbd5e1').text('혈중알코올');
+
+    gGlass = svgEl.append('g').attr('id','gg');
+    gBac   = svgEl.append('g').attr('id','gb');
+
+    /* 초기 노드 12개 — 중앙에 흩어진 상태로 시작 */
+    nodes = d3.range(12).map(function(i){
+      return {
+        id:'n'+i, filled:false, r:8,
+        x: W*0.15 + Math.random()*W*0.45,
+        y: H*0.2  + Math.random()*H*0.6
+      };
+    });
+
+    sim = d3.forceSimulation(nodes)
+      .force('x', d3.forceX(W*0.29).strength(0.06))
+      .force('y', d3.forceY(H*0.48).strength(0.08))
+      .force('collision', d3.forceCollide(function(d){return d.r+1.5;}))
+      .alphaDecay(0.015)
+      .on('tick', ticked);
+
+    render('#aaaaaa', 0);
+  }
+
+  function ticked(){
+    if(!gGlass)return;
+    gGlass.selectAll('circle')
+      .attr('cx', function(d){return Math.max(d.r+2, Math.min(W*0.60-d.r, d.x));})
+      .attr('cy', function(d){return Math.max(d.r+2, Math.min(H-d.r-10, d.y));});
+  }
+
+  function render(baseCol, bac){
+    if(!gGlass)return;
+    var circles = gGlass.selectAll('circle').data(nodes, function(d){return d.id;});
+    circles.enter().append('circle').merge(circles)
+      .transition().duration(500)
+      .attr('r', function(d){return d.r;})
+      .attr('fill', function(d){return d.filled ? baseCol : '#f1f5f9';})
+      .attr('stroke', function(d){return d.filled ? d3.color(baseCol).darker(0.4) : '#e2e8f0';})
+      .attr('stroke-width', 0.7)
+      .attr('opacity', function(d){return d.filled?1:0.3;});
+
+    /* BAC 버블 */
+    var br = Math.max(14, Math.min(52, bac*360+12));
+    var bc = gBac.selectAll('circle.bac-c').data([1]);
+    bc.enter().append('circle').attr('class','bac-c')
+      .attr('cx',W*0.82).attr('cy',H*0.48).attr('r',0)
+      .merge(bc).transition().duration(700).ease(d3.easeBounceOut)
+      .attr('cx',W*0.82).attr('cy',H*0.48)
+      .attr('r',br)
+      .attr('fill',bacCol(bac))
+      .attr('stroke',d3.color(bacCol(bac)).darker(0.5))
+      .attr('stroke-width',1);
+
+    var bt = gBac.selectAll('text.bac-t').data([1]);
+    bt.enter().append('text').attr('class','bac-t')
+      .attr('text-anchor','middle').attr('dominant-baseline','middle')
+      .merge(bt).transition().duration(700)
+      .attr('x',W*0.82).attr('y',H*0.48)
+      .attr('font-size', Math.min(11, br/3))
+      .attr('fill','#fff').attr('font-weight','bold')
+      .attr('opacity', br>22?1:0)
+      .text(bac.toFixed(3)+'%');
+  }
+
+  function update(glasses, type, bac){
+    if(!sim){ init(); }
+    var baseCol = TYPE_COL[type]||'#93c5fd';
+    var filled = Math.min(glasses, 12);
+
+    /* 노드 상태 변경 — 위치는 그대로, filled만 업데이트 */
+    nodes.forEach(function(n, i){ n.filled = i < filled; n.r = i < filled ? 9+(i%3)*2 : 7; });
+
+    /* 목표 x 위치 재설정 — filled는 왼쪽, empty는 오른쪽으로 자연스럽게 */
+    sim.force('x', d3.forceX(function(d){ return d.filled ? W*0.22 : W*0.44; }).strength(0.07));
+    sim.force('collision', d3.forceCollide(function(d){return d.r+1.5;}));
+    sim.alpha(0.6).restart();  /* 현재 위치에서 다시 움직임 시작 */
+
+    render(baseCol, bac);
+  }
+
+  return { init:init, update:update };
+})();
+
+function selD(t,b){document.querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});b.classList.add('active');window._cs={t:t,d:null,w:null,h:null};document.getElementById('ww').style.display='none';document.getElementById('tw').style.display='none';document.getElementById('br').classList.remove('show');var A={soju:{l:['1잔','2잔','3잔','4잔','반병(5잔)','1병(7잔)','1.5병+'],v:[1,2,3,4,5,7,10]},beer:{l:['1캔','2캔','3캔','4캔','6캔','8캔+'],v:[1,2,3,4,6,8]},wine:{l:['1잔','2잔','3잔','반병(4잔)','1병(6잔)'],v:[1,2,3,4,6]},mak:{l:['1사발','2사발','3사발','4사발','1통+'],v:[1,2,3,4,5]}};var ap=document.getElementById('ap');ap.innerHTML=A[t].l.map(function(l,i){return '<button class="pill" onclick="selA('+A[t].v[i]+',this)">'+l+'</button>'}).join('');document.getElementById('aw').style.display='block';}
+function selA(v,b){b.closest('.pg').querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});b.classList.add('active');window._cs.d=v;document.getElementById('ww').style.display='block';_liveUpdate();}
+function selW(v,b){b.closest('.pg').querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});b.classList.add('active');window._cs.w=v;document.getElementById('tw').style.display='block';_liveUpdate();}
+function selT(v,b){b.closest('.pg').querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});b.classList.add('active');window._cs.h=v;doCalc();}
+
+function _liveUpdate(){
+  /* 음주량만 선택해도 버블 미리 움직임 */
+  var cs=window._cs;
+  if(!cs||!cs.t||!cs.d)return;
+  document.getElementById('br').classList.add('show');
+  VIZ.update(cs.d, cs.t, 0);
+}
+
+function doCalc(){
+  var cs=window._cs;
+  if(!cs||!cs.t||!cs.d||!cs.w||cs.h===null)return;
+  var G={soju:7.11,beer:19.75,wine:15.80,mak:9.48};
+  var a=cs.d*G[cs.t],r=a/(cs.w*.7*10),bac=Math.max(0,r-.015*cs.h),rem=bac>0?Math.max(0,bac/.015).toFixed(1):0;
+  document.getElementById('br').classList.add('show');
+  VIZ.update(cs.d, cs.t, bac);
+  var nEl=document.getElementById('bv'),bEl=document.getElementById('bb'),tEl=document.getElementById('bt'),needle=document.getElementById('gaugeNeedle'),tip=document.getElementById('vizTip');
+  nEl.textContent=bac.toFixed(3)+'%';
+  if(needle)needle.style.left=Math.min(bac/0.30,1)*100+'%';
+  if(bac<.001){nEl.style.color='#10b981';bEl.className='bb safe';bEl.textContent='✅ 운전 가능 수준';tEl.textContent='';if(tip)tip.textContent='지금은 운전에 문제없는 수준입니다. 다만 개인차가 있으니 몸 상태를 먼저 확인하세요.';}
+  else if(bac<.03){nEl.style.color='#f59e0b';bEl.className='bb warn';bEl.textContent='⚠️ 주의 구간';tEl.textContent='안전 운전까지 약 '+rem+'시간';if(tip)tip.textContent='면허정지 기준(0.03%) 근접. 개인차에 따라 단속에 걸릴 수 있습니다. 대리운전을 이용하세요.';}
+  else if(bac<.08){nEl.style.color='#f59e0b';bEl.className='bb warn';bEl.textContent='🟡 면허정지 구간';tEl.textContent='안전 운전까지 '+rem+'시간';if(tip)tip.textContent='0.03% 이상 — 면허정지 및 벌금 대상. 지금 운전하면 음주운전으로 처벌받습니다. 즉시 대리운전을 부르세요.';}
+  else if(bac<.2){nEl.style.color='#ef4444';bEl.className='bb danger';bEl.textContent='🔴 면허취소 + 형사처벌';tEl.textContent='안전 운전까지 '+rem+'시간';if(tip)tip.textContent='0.08% 이상 — 면허취소 및 형사처벌 확정. 절대 운전하지 마세요. 사고 시 특가법 적용으로 실형 가능성이 높습니다.';}
+  else{nEl.style.color='#ef4444';bEl.className='bb critical';bEl.textContent='🚨 위험 수준';tEl.textContent='안전 운전까지 '+rem+'시간';if(tip)tip.textContent='0.20% 이상 — 극도로 위험한 수준. 운전은 물론이고 혼자 있는 것도 위험합니다. 주변에 도움을 요청하세요.';}
+}
 window._cs={t:null,d:null,w:null,h:null};
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 </head>
 <body>
 
@@ -287,9 +435,18 @@ window._cs={t:null,d:null,w:null,h:null};
       </div>
       <div class="br" id="br">
         <div class="bl">혈중알코올농도 추정</div>
+        <div id="bac-viz-wrap">
+          <svg id="bac-viz"></svg>
+          <div class="viz-tip" id="vizTip"></div>
+        </div>
         <div class="bv" id="bv">0.000%</div>
         <div class="bb" id="bb"></div>
         <div class="bt" id="bt"></div>
+        <div class="gauge-wrap">
+          <div class="gauge-track"></div>
+          <div class="gauge-needle" id="gaugeNeedle" style="left:0%"></div>
+        </div>
+        <div class="gauge-labels"><span>안전</span><span>0.03</span><span>0.08</span><span>0.20</span><span>위험</span></div>
       </div>
     </div>
 
@@ -564,7 +721,7 @@ function navTo(tab){
   }
   window.scrollTo(0,0);
 }
-setTimeout(function(){document.getElementById('splash').style.display='none';document.getElementById('home').style.display='block'},3000);
+setTimeout(function(){document.getElementById('splash').style.display='none';document.getElementById('home').style.display='block'},2000);
 </script>
 </body>
 </html>
