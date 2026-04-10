@@ -1,0 +1,443 @@
+<!--
+===========================================================
+  11911 웹앱 학폭 진술서 정리기 삽입 가이드
+===========================================================
+
+▶ 1. <head> 안 <script> 블록에 PART 1 JS 전체를 추가하세요.
+▶ 2. #home .phase-list 마지막에 PART 2 카드를 추가하세요.
+▶ 3. #mv 닫는태그 뒤에 PART 3 패널들을 붙여넣으세요.
+▶ 4. navTo() 함수의 hideAll 목록에 아래 ID 추가:
+     'hp-main','hp-victim','hp-accused','hp-both','hp-statement'
+===========================================================
+-->
+
+
+<!-- =====================================================
+  PART 1: <head> 안 <script> 에 추가할 JS
+  ===================================================== -->
+<script id="COPY_TO_HEAD">
+/* ── 학폭 전용 상수 ── */
+var CLAUDE_KEY = '';  /* Anthropic API Key — 배포 전 설정 */
+
+/* ── 학폭 패널 이동 ── */
+function showHp(id) {
+  document.getElementById('home').style.display = 'none';
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+function hpBack(parent) {
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById(parent).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+/* ── 진술서 정리기 ── */
+function hpShowStep(step) {
+  var steps = ['input', 'loading', 'result'];
+  steps.forEach(function(s) {
+    var el = document.getElementById('hp-step-' + s);
+    if (el) el.style.display = (s === step) ? 'block' : 'none';
+  });
+}
+
+function hpSubmit() {
+  var txt = document.getElementById('hp-input').value.trim();
+  if (!txt) {
+    alert('아이에게 들은 내용을 입력해 주세요.');
+    return;
+  }
+  hpShowStep('loading');
+  window.scrollTo(0, 0);
+  hpAnalyze(txt);
+}
+
+function hpAnalyze(txt) {
+  var side = document.getElementById('hp-side').value;
+  var sideLabel = side === 'victim' ? '피해자' : (side === 'accused' ? '가해자' : '쌍방');
+
+  var prompt =
+    '당신은 학교폭력 사안에서 ' + sideLabel + ' 측 아이의 진술을 정리해주는 전문가입니다.\n' +
+    '아래는 부모가 아이에게 들은 내용을 메모한 것입니다.\n\n' +
+    '===\n' + txt + '\n===\n\n' +
+    '반드시 아래 JSON 형식으로만 응답하세요. JSON 외에 다른 텍스트를 포함하지 마세요.\n\n' +
+    '{\n' +
+    '  "who": "누가 (한두 문장, 불분명하면 불분명)",\n' +
+    '  "when": "언제",\n' +
+    '  "where": "어디서",\n' +
+    '  "what": "무엇을",\n' +
+    '  "how": "어떻게",\n' +
+    '  "why": "왜",\n' +
+    '  "draft": "학교 제출용 진술서 초안. 아이의 1인칭 시점, 감정 배제, 사실 중심. 마지막에 위 내용은 사실입니다. 이름/날짜는 [ ]로 표시"\n' +
+    '}\n\n' +
+    '주의: 부모 해석이나 추측을 추가하지 마세요. 입력된 사실만 사용하세요.';
+
+  fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': CLAUDE_KEY,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 2000,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  }).then(function(r) {
+    if (!r.ok) {
+      return r.json().then(function(e) {
+        throw new Error((e.error && e.error.message) ? e.error.message : 'HTTP ' + r.status);
+      });
+    }
+    return r.json();
+  }).then(function(d) {
+    var result = (d.content && d.content[0] && d.content[0].text) ? d.content[0].text : '';
+    if (!result) { throw new Error('empty'); }
+    hpRenderResult(result);
+  }).catch(function(err) {
+    hpShowStep('input');
+    var msg = err.message || '';
+    if (msg.indexOf('401') !== -1 || msg.indexOf('api_key') !== -1) {
+      alert('API 키가 올바르지 않습니다.\nCLAUDE_KEY를 확인해 주세요.');
+    } else if (msg.indexOf('429') !== -1) {
+      alert('요청이 너무 많습니다. 잠시 후 다시 시도해 주세요.');
+    } else {
+      alert('오류가 발생했습니다. 네트워크를 확인하고 다시 시도해 주세요.');
+    }
+  });
+}
+
+function hpRenderResult(text) {
+  try {
+    var clean = text.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+    var data = JSON.parse(clean);
+    document.getElementById('hp-out-who').textContent   = data.who || '—';
+    document.getElementById('hp-out-when').textContent  = data.when || '—';
+    document.getElementById('hp-out-where').textContent = data.where || '—';
+    document.getElementById('hp-out-what').textContent  = data.what || '—';
+    document.getElementById('hp-out-how').textContent   = data.how || '—';
+    document.getElementById('hp-out-why').textContent   = data.why || '—';
+    document.getElementById('hp-draft').value = data.draft || '';
+    hpShowStep('result');
+    window.scrollTo(0, 0);
+  } catch (e) {
+    hpShowStep('input');
+    alert('응답을 처리하지 못했습니다. 다시 시도해 주세요.');
+  }
+}
+
+function hpCopyDraft() {
+  var txt = document.getElementById('hp-draft').value;
+  var btn = document.getElementById('hp-copy-btn');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(txt).then(function() {
+      btn.textContent = '✅ 복사 완료!';
+      setTimeout(function() { btn.textContent = '📋 진술서 초안 복사'; }, 2000);
+    });
+  } else {
+    document.getElementById('hp-draft').select();
+    document.execCommand('copy');
+    btn.textContent = '✅ 복사 완료!';
+    setTimeout(function() { btn.textContent = '📋 진술서 초안 복사'; }, 2000);
+  }
+}
+
+function hpDownloadPdf() {
+  var draft = document.getElementById('hp-draft').value;
+  var container = document.createElement('div');
+  container.style.cssText = 'font-family:sans-serif;font-size:14px;line-height:2;padding:40px;color:#1a1a2e;';
+  container.innerHTML = '<h2 style="text-align:center;margin-bottom:24px">진 술 서</h2>' +
+    '<div style="white-space:pre-wrap">' + draft.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>';
+  document.body.appendChild(container);
+
+  if (typeof html2pdf === 'undefined') {
+    var s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+    s.onload = function() { hpRunPdf(container); };
+    document.head.appendChild(s);
+  } else {
+    hpRunPdf(container);
+  }
+}
+
+function hpRunPdf(el) {
+  html2pdf().set({
+    margin: 10,
+    filename: '진술서_초안.pdf',
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'mm', format: 'a4' }
+  }).from(el).save().then(function() {
+    document.body.removeChild(el);
+  });
+}
+
+function hpReset() {
+  document.getElementById('hp-input').value = '';
+  document.getElementById('hp-draft').value = '';
+  hpShowStep('input');
+  window.scrollTo(0, 0);
+}
+</script>
+
+
+<!-- =====================================================
+  PART 2: #home .phase-list 에 추가할 카드
+  ===================================================== -->
+<div class="pc" onclick="showHp('hp-main')">
+  <div class="pi" style="background:#fef9c3;color:#ca8a04;font-size:22px">🏫</div>
+  <div class="pd">
+    <div class="pt">학교폭력</div>
+    <div class="ps">피해·가해·쌍방 즉각 대응</div>
+  </div>
+  <div class="pa">›</div>
+</div>
+
+
+<!-- =====================================================
+  PART 3: #mv 닫는태그 뒤에 붙여넣을 패널들
+  ===================================================== -->
+
+<!-- 학폭 메인 -->
+<div class="panel" id="hp-main">
+  <div class="ph">
+    <button class="back" onclick="goHome()">‹</button>
+    <span>학교폭력 대응</span>
+  </div>
+  <div class="pc" onclick="showHp('hp-victim')">
+    <div class="pi" style="background:#eff6ff;color:#2563eb;font-size:22px">🛡️</div>
+    <div class="pd"><div class="pt">우리 아이가 당했습니다</div><div class="ps">피해자 측 즉각 행동 가이드</div></div>
+    <div class="pa">›</div>
+  </div>
+  <div class="pc" onclick="showHp('hp-accused')">
+    <div class="pi" style="background:#fef2f2;color:#ef4444;font-size:22px">⚖️</div>
+    <div class="pd"><div class="pt">우리 아이가 가해자라고 합니다</div><div class="ps">가해자 측 즉각 행동 가이드</div></div>
+    <div class="pa">›</div>
+  </div>
+  <div class="pc" onclick="showHp('hp-both')">
+    <div class="pi" style="background:#fff7ed;color:#f59e0b;font-size:22px">🔄</div>
+    <div class="pd"><div class="pt">쌍방이라고 합니다</div><div class="ps">쌍방 사안 전략 가이드</div></div>
+    <div class="pa">›</div>
+  </div>
+  <div class="pc" onclick="showHp('hp-statement')">
+    <div class="pi" style="background:#ecfdf5;color:#10b981;font-size:22px">📝</div>
+    <div class="pd"><div class="pt">진술서 정리기</div><div class="ps">내용 입력 → AI 진술서 초안 자동 작성</div></div>
+    <div class="pa">›</div>
+  </div>
+</div>
+
+<!-- 피해자 패널 -->
+<div class="panel" id="hp-victim">
+  <div class="ph">
+    <button class="back" onclick="hpBack('hp-main')">‹</button>
+    <span>피해자 측 대응</span>
+  </div>
+  <div class="ab" style="background:#fef2f2;border-left:4px solid #ef4444;padding:14px 16px;border-radius:12px;margin-bottom:12px">
+    <div class="at" style="color:#ef4444;font-weight:700;margin-bottom:6px">⚡ 지금 즉시</div>
+    <div class="ai">아이 상태를 확인하세요.</div>
+    <div class="ai">다친 곳이 있으면 <strong>병원부터</strong> 가세요.</div>
+    <div class="ai">병원에서 <strong>"전치 O주" 진단서</strong>를 꼭 받으세요.</div>
+  </div>
+  <div class="ab" style="background:#eff6ff;border-left:4px solid #2563eb;padding:14px 16px;border-radius:12px;margin-bottom:12px">
+    <div class="at" style="color:#2563eb;font-weight:700;margin-bottom:6px">📅 오늘 안에</div>
+    <div class="ai">아이에게 천천히 물어보세요. <strong>다그치지 마세요.</strong></div>
+    <div class="ai">아이가 말한 내용을 그대로 메모하세요.</div>
+    <div class="ai">카톡·문자 등 관련 대화는 <strong>삭제하지 말고 그대로</strong> 두세요.</div>
+  </div>
+  <div class="ab" style="background:#fff7ed;border-left:4px solid #f59e0b;padding:14px 16px;border-radius:12px;margin-bottom:12px">
+    <div class="at" style="color:#f59e0b;font-weight:700;margin-bottom:6px">📩 내일까지</div>
+    <div class="ai">담임교사에게 문자로 이렇게 보내세요.</div>
+    <div style="background:#fff;border-radius:8px;padding:10px 14px;margin:8px 0;font-weight:700;color:#1a1a2e;font-size:15px">"학교폭력 사안으로 신고합니다."</div>
+    <div class="ai">⚠️ "상담 요청"이라 하면 묻힙니다. <strong>"신고"</strong> 단어를 쓰세요.</div>
+  </div>
+  <div class="tip" style="margin-bottom:16px">
+    <strong>이번 주 안에</strong> — 학교에서 "사안조사"가 시작됩니다.<br>
+    아이가 쓸 <strong>진술서가 학폭위 결과를 좌우</strong>합니다.<br>
+    제출 전 변호사 검토가 마지막 기회입니다.
+  </div>
+  <div class="pc" onclick="showHp('hp-statement')" style="background:#ecfdf5;margin-bottom:16px">
+    <div class="pi" style="background:#d1fae5;color:#10b981;font-size:20px">📝</div>
+    <div class="pd"><div class="pt">진술서 정리기 바로가기</div><div class="ps">AI가 진술서 초안을 작성해 드립니다</div></div>
+    <div class="pa">›</div>
+  </div>
+  <div class="ca">
+    <a href="https://cholawyer.github.io/divine-justice/" target="_blank" class="cb1">도움이 필요하다면</a>
+    <a href="tel:01025020208" class="cb2">📞 010-2502-0208 즉시 전화</a>
+    <div class="cn">수습할 수 없을 만큼 일이 커졌다면 상담 신청하세요</div>
+  </div>
+</div>
+
+<!-- 가해자 패널 -->
+<div class="panel" id="hp-accused">
+  <div class="ph">
+    <button class="back" onclick="hpBack('hp-main')">‹</button>
+    <span>가해자 측 대응</span>
+  </div>
+  <div class="ab" style="background:#fef2f2;border-left:4px solid #ef4444;padding:14px 16px;border-radius:12px;margin-bottom:12px">
+    <div class="at" style="color:#ef4444;font-weight:700;margin-bottom:6px">🚫 지금 절대 하지 마세요</div>
+    <div class="ai">❌ 상대 부모에게 먼저 연락하지 마세요.<br><span style="color:#6b7280;font-size:13px">합의 시도가 불리한 증거가 됩니다.</span></div>
+    <div class="ai" style="margin-top:8px">❌ 아이를 다그쳐서 추궁하지 마세요.<br><span style="color:#6b7280;font-size:13px">위축되면 진술이 꼬입니다.</span></div>
+    <div class="ai" style="margin-top:8px">❌ 학부모 카톡방에 상황을 공유하지 마세요.</div>
+  </div>
+  <div class="ab" style="background:#eff6ff;border-left:4px solid #2563eb;padding:14px 16px;border-radius:12px;margin-bottom:12px">
+    <div class="at" style="color:#2563eb;font-weight:700;margin-bottom:6px">📅 오늘 할 일</div>
+    <div class="ai">아이에게 차분하게 물어보세요.</div>
+    <div style="background:#fff;border-radius:8px;padding:10px 14px;margin:8px 0;color:#1a1a2e;font-size:14px;font-style:italic">"학교에서 무슨 일이 있었는지 네 입으로 말해줄래?"</div>
+    <div class="ai">아이가 말한 내용을 있는 그대로 메모하세요.</div>
+  </div>
+  <div class="tip" style="margin-bottom:16px">
+    <strong>사안조사 전까지</strong> — 진술서 한 장이 아이의<br>
+    <strong>생활기록부 기재</strong>를 결정합니다.<br>
+    학교 제출 전 반드시 변호사 검토를 받으세요.
+  </div>
+  <div class="pc" onclick="showHp('hp-statement')" style="background:#ecfdf5;margin-bottom:16px">
+    <div class="pi" style="background:#d1fae5;color:#10b981;font-size:20px">📝</div>
+    <div class="pd"><div class="pt">진술서 정리기 바로가기</div><div class="ps">AI가 진술서 초안을 작성해 드립니다</div></div>
+    <div class="pa">›</div>
+  </div>
+  <div class="ca">
+    <a href="https://cholawyer.github.io/divine-justice/" target="_blank" class="cb1">도움이 필요하다면</a>
+    <a href="tel:01025020208" class="cb2">📞 010-2502-0208 즉시 전화</a>
+    <div class="cn">수습할 수 없을 만큼 일이 커졌다면 상담 신청하세요</div>
+  </div>
+</div>
+
+<!-- 쌍방 패널 -->
+<div class="panel" id="hp-both">
+  <div class="ph">
+    <button class="back" onclick="hpBack('hp-main')">‹</button>
+    <span>쌍방 사안 대응</span>
+  </div>
+  <div class="ab" style="background:#fff7ed;border-left:4px solid #f59e0b;padding:14px 16px;border-radius:12px;margin-bottom:12px">
+    <div class="at" style="color:#f59e0b;font-weight:700;margin-bottom:6px">⚠️ 지금 알아야 할 것</div>
+    <div class="ai">쌍방 사안은 우리 아이가 <strong>피해자이면서 동시에 가해자로</strong> 처리될 수 있습니다.</div>
+    <div class="ai" style="margin-top:6px">"누가 먼저"를 따지는 게 아닙니다.<br><strong>우리 아이의 피해 사실 확보</strong>가 먼저입니다.</div>
+  </div>
+  <div class="ab" style="background:#eff6ff;border-left:4px solid #2563eb;padding:14px 16px;border-radius:12px;margin-bottom:12px">
+    <div class="at" style="color:#2563eb;font-weight:700;margin-bottom:6px">🩺 피해 사실 확보</div>
+    <div class="ai">다친 곳이 있으면 병원 → 진단서.</div>
+    <div class="ai">아이 진술을 그대로 메모.</div>
+    <div class="ai">상대 부모에게 연락하지 마세요.</div>
+  </div>
+  <div class="tip" style="margin-bottom:16px">
+    <strong>쌍방 사안은 진술 순서, 표현 하나로</strong><br>
+    피해자도 가해자가 됩니다.<br>
+    학교에 어떤 말도 하기 전에 변호사와 상의하세요.
+  </div>
+  <div class="pc" onclick="showHp('hp-statement')" style="background:#ecfdf5;margin-bottom:16px">
+    <div class="pi" style="background:#d1fae5;color:#10b981;font-size:20px">📝</div>
+    <div class="pd"><div class="pt">진술서 정리기 바로가기</div><div class="ps">AI가 진술서 초안을 작성해 드립니다</div></div>
+    <div class="pa">›</div>
+  </div>
+  <div class="ca">
+    <a href="https://cholawyer.github.io/divine-justice/" target="_blank" class="cb1">도움이 필요하다면</a>
+    <a href="tel:01025020208" class="cb2">📞 010-2502-0208 즉시 전화</a>
+    <div class="cn">수습할 수 없을 만큼 일이 커졌다면 상담 신청하세요</div>
+  </div>
+</div>
+
+<!-- 진술서 정리기 패널 -->
+<div class="panel" id="hp-statement">
+  <div class="ph">
+    <button class="back" onclick="hpBack('hp-main')">‹</button>
+    <span>진술서 정리기</span>
+  </div>
+
+  <!-- 입장 선택 (항상 표시) -->
+  <div style="margin-bottom:16px">
+    <div style="font-size:13px;color:#6b7280;margin-bottom:8px">아이의 입장을 선택하세요</div>
+    <select id="hp-side" style="width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid #e5e7eb;font-size:15px;background:#fff;color:#1a1a2e">
+      <option value="victim">🛡️ 피해자</option>
+      <option value="accused">⚖️ 가해자</option>
+      <option value="both">🔄 쌍방</option>
+    </select>
+  </div>
+
+  <!-- STEP 1: 텍스트 입력 -->
+  <div id="hp-step-input">
+    <div style="font-size:13px;color:#6b7280;margin-bottom:8px">아이에게 들은 내용을 입력하세요</div>
+    <textarea id="hp-input" rows="8"
+      placeholder="예) 쉬는 시간에 같은 반 김OO이 화장실에서 때렸어요. 먼저 욕을 해서 싸웠고, 선생님한테는 말 못했대요. 3월 둘째 주 화요일쯤이라고 했어요."
+      style="width:100%;padding:14px;border-radius:12px;border:1.5px solid #e5e7eb;font-size:14px;line-height:1.7;resize:vertical;box-sizing:border-box;color:#1a1a2e"></textarea>
+    <div class="tip" style="margin-top:12px;margin-bottom:12px">
+      감정·해석 없이 <strong>아이가 말한 그대로</strong> 적어주세요.<br>
+      모르는 부분은 비워도 됩니다.
+    </div>
+    <button onclick="hpSubmit()"
+      style="width:100%;background:#2563eb;color:#fff;border:none;border-radius:12px;padding:15px;font-size:16px;font-weight:700;cursor:pointer">
+      AI 진술서 초안 작성 →
+    </button>
+  </div>
+
+  <!-- STEP 2: 로딩 -->
+  <div id="hp-step-loading" style="display:none">
+    <style>@keyframes hp-spin{to{transform:rotate(360deg)}}</style>
+    <div style="background:#fff;border-radius:16px;padding:48px 20px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.06)">
+      <div style="display:inline-block;width:44px;height:44px;border:4px solid #e5e7eb;border-top-color:#2563eb;border-radius:50%;animation:hp-spin 0.8s linear infinite;margin-bottom:18px"></div>
+      <div style="font-size:16px;color:#1a1a2e;font-weight:600;margin-bottom:6px">진술서 초안 작성 중</div>
+      <div style="font-size:13px;color:#9ca3af">잠시만 기다려 주세요</div>
+    </div>
+  </div>
+
+  <!-- STEP 3: 결과 -->
+  <div id="hp-step-result" style="display:none">
+    <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:14px">
+      <div style="font-weight:700;color:#1a1a2e;margin-bottom:12px;font-size:15px">📋 육하원칙 정리</div>
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        <tr>
+          <td style="padding:8px 0;color:#6b7280;width:52px;vertical-align:top;font-size:13px">누가</td>
+          <td id="hp-out-who" style="padding:8px 0;color:#1a1a2e;font-weight:500;border-bottom:1px solid #f3f4f6"></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:#6b7280;vertical-align:top;font-size:13px">언제</td>
+          <td id="hp-out-when" style="padding:8px 0;color:#1a1a2e;font-weight:500;border-bottom:1px solid #f3f4f6"></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:#6b7280;vertical-align:top;font-size:13px">어디서</td>
+          <td id="hp-out-where" style="padding:8px 0;color:#1a1a2e;font-weight:500;border-bottom:1px solid #f3f4f6"></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:#6b7280;vertical-align:top;font-size:13px">무엇을</td>
+          <td id="hp-out-what" style="padding:8px 0;color:#1a1a2e;font-weight:500;border-bottom:1px solid #f3f4f6"></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:#6b7280;vertical-align:top;font-size:13px">어떻게</td>
+          <td id="hp-out-how" style="padding:8px 0;color:#1a1a2e;font-weight:500;border-bottom:1px solid #f3f4f6"></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:#6b7280;vertical-align:top;font-size:13px">왜</td>
+          <td id="hp-out-why" style="padding:8px 0;color:#1a1a2e;font-weight:500"></td>
+        </tr>
+      </table>
+    </div>
+
+    <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:14px">
+      <div style="font-weight:700;color:#1a1a2e;margin-bottom:10px;font-size:15px">📄 진술서 초안</div>
+      <textarea id="hp-draft" rows="10"
+        style="width:100%;padding:12px;border-radius:10px;border:1.5px solid #e5e7eb;font-size:13px;line-height:1.8;resize:vertical;box-sizing:border-box;color:#1a1a2e"></textarea>
+      <div style="font-size:12px;color:#9ca3af;margin-top:6px">직접 수정한 뒤 복사·저장하세요</div>
+    </div>
+
+    <button id="hp-copy-btn" onclick="hpCopyDraft()"
+      style="width:100%;background:#2563eb;color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:10px">
+      📋 진술서 초안 복사
+    </button>
+    <button onclick="hpDownloadPdf()"
+      style="width:100%;background:#10b981;color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:10px">
+      ⬇️ PDF 저장
+    </button>
+    <button onclick="hpReset()"
+      style="width:100%;background:#f3f4f6;color:#6b7280;border:none;border-radius:12px;padding:12px;font-size:14px;cursor:pointer;margin-bottom:16px">
+      🔄 처음부터 다시
+    </button>
+
+    <div class="ca">
+      <a href="https://cholawyer.github.io/divine-justice/" target="_blank" class="cb1">도움이 필요하다면</a>
+      <a href="tel:01025020208" class="cb2">📞 010-2502-0208 즉시 전화</a>
+      <div class="cn">진술서 제출 전 변호사 검토를 꼭 받으세요</div>
+    </div>
+  </div>
+
+</div>
+<!-- /hp-statement -->

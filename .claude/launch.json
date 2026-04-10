@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "drunk-web",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8080", "--directory", "/Users/limkipyo/Desktop/자료/drunk_web"],
+      "port": 8080
+    }
+  ]
+}
